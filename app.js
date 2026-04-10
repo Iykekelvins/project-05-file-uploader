@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // routes
-import authRouter from './auth.route.js';
+import authRouter from './routes/auth.route.js';
 
 app.use('/', authRouter);
 
