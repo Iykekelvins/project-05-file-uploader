@@ -35,4 +35,29 @@ const createNewFolder = [
 	},
 ];
 
-export { createNewFolderView, createNewFolder };
+const deleteFolder = [
+	isAuth,
+	async (req, res) => {
+		const folder = await prisma.folder.findFirst({
+			where: {
+				id: parseInt(req.params.id),
+				userId: req.user.id,
+			},
+		});
+
+		if (!folder) {
+			throw new Error('Folder does not exist');
+		}
+
+		await prisma.folder.delete({
+			where: {
+				id: parseInt(req.params.id),
+				userId: req.user.id,
+			},
+		});
+
+		res.redirect('/');
+	},
+];
+
+export { createNewFolderView, createNewFolder, deleteFolder };
