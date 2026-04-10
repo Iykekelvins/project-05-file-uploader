@@ -1,0 +1,43 @@
+import { prisma } from './lib/prisma.js';
+
+async function main() {
+	const user = await prisma.user.create({
+		data: {
+			name: 'Kelvin Ochubili',
+			email: 'kelvin@prisma.io',
+			password: 'test-password',
+			folders: {
+				create: {
+					name: 'My First Folder',
+					files: {
+						create: {
+							name: 'My First File',
+							path: '/my-first-file.txt',
+						},
+					},
+				},
+			},
+		},
+		include: {
+			folders: true,
+		},
+	});
+	console.log('User:', user);
+
+	const allUsers = await prisma.user.findMany({
+		include: {
+			folders: true,
+		},
+	});
+	console.log('All users:', JSON.stringify(allUsers, null, 2));
+}
+
+main()
+	.then(async () => {
+		await prisma.$disconnect();
+	})
+	.catch(async (e) => {
+		console.error(e);
+		await prisma.$disconnect();
+		process.exit(1);
+	});
