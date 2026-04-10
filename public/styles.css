@@ -256,3 +256,26 @@ button:hover {
 .inline {
 	display: inline;
 }
+
+.file-icon {
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+
+.file-name {
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.file-meta {
+	color: var(--muted);
+	font-size: 12px;
+	margin-bottom: 12px;
+}
+
+.file-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: space-between;
+	align-items: center;
+}

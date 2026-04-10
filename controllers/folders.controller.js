@@ -35,10 +35,28 @@ const createNewFolder = [
 	},
 ];
 
+const getFolder = async (req, res) => {
+	const folder = await prisma.folder.findUnique({
+		where: {
+			id: parseInt(req.params.id),
+			userId: req.user.id,
+		},
+		include: {
+			files: true,
+		},
+	});
+
+	if (!folder) {
+		throw new Error('Folder does not exist');
+	}
+
+	res.render('folder', { folder, files: folder.files });
+};
+
 const deleteFolder = [
 	isAuth,
 	async (req, res) => {
-		const folder = await prisma.folder.findFirst({
+		const folder = await prisma.folder.findUnique({
 			where: {
 				id: parseInt(req.params.id),
 				userId: req.user.id,
@@ -60,4 +78,4 @@ const deleteFolder = [
 	},
 ];
 
-export { createNewFolderView, createNewFolder, deleteFolder };
+export { createNewFolderView, createNewFolder, getFolder, deleteFolder };
