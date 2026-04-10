@@ -34,8 +34,10 @@ app.use(express.static('public'));
 
 // routes
 import authRouter from './routes/auth.route.js';
+import indexRouter from './routes/index.route.js';
 
 app.use('/', authRouter);
+app.use('/', indexRouter);
 
 const PORT = process.env.PORT || 8001;
 app.listen(PORT, (err) => {

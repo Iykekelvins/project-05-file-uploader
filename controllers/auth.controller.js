@@ -1,5 +1,19 @@
 import passport from 'passport';
 
+const createLoginView = (req, res) => {
+	if (req.isAuthenticated()) {
+		return res.redirect('/');
+	}
+	res.render('login', { error: null });
+};
+
+const createSignupView = (req, res) => {
+	if (req.isAuthenticated()) {
+		return res.redirect('/');
+	}
+	res.render('signup', { error: null });
+};
+
 const login = (req, res, next) => {
 	passport.authenticate('local', (err, user, info) => {
 		if (err) return next(err);
@@ -26,4 +40,4 @@ const logout = (req, res, next) => {
 	});
 };
 
-export { login, logout };
+export { createLoginView, createSignupView, login, logout };

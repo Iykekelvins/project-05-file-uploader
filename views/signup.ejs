@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup - File Uploader</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="auth-wrapper">
+    <div class="card">
+
+      <div class="brand">
+        <h1>FileVault</h1>
+        <p>Create your account to start uploading</p>
+      </div>
+
+      <% if (error) { %>
+        <div class="alert"><%= error %></div>
+      <% } %>
+
+      <form action="/signup" method="POST">
+
+        <div class="form-group">
+          <label>Name</label>
+          <input 
+            type="text" 
+            name="name" 
+            placeholder="John Doe" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="you@example.com" 
+            required 
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input 
+            type="password" 
+            name="password" 
+            placeholder="••••••••" 
+            required 
+          />
+        </div>
+
+        <button type="submit">Create Account</button>
+      </form>
+
+      <div class="helper-text">
+        Already have an account?
+        <a href="/login">Login</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
