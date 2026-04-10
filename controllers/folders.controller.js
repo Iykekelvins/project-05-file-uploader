@@ -1,0 +1,38 @@
+import { matchedData, validationResult } from 'express-validator';
+import { prisma } from '../lib/prisma.js';
+import { validateFolderName } from '../lib/validator.js';
+import { isAuth } from '../middlewares/authMiddleware.js';
+
+const createNewFolderView = (req, res) => {
+	res.render('new-folder', { error: null });
+};
+
+const createNewFolder = [
+	isAuth,
+	validateFolderName,
+	async (req, res, next) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(400).render('new-folder', {
+				error: errors.array()[0].msg,
+			});
+		}
+
+		try {
+			const rawName = matchedData(req).name.trim();
+
+			await prisma.folder.create({
+				data: {
+					name: rawName,
+					userId: req.user.id,
+				},
+			});
+
+			res.redirect('/');
+		} catch (error) {
+			next(error);
+		}
+	},
+];
+
+export { createNewFolderView, createNewFolder };

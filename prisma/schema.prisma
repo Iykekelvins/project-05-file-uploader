@@ -24,7 +24,7 @@ model User {
 
 model Folder {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique()
   userId    Int
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   files     File[]

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - File Uploader</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="app-wrapper">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="welcome">
+        <h2>Welcome, <%= user.name %></h2>
+        <p>Manage your folders and files</p>
+      </div>
+
+      <div class="actions">
+        <a class="btn secondary" href="/folders/new">+ New Folder</a>
+
+        <a href="/logout" class="btn danger" type="submit">Logout</a>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+
+      <% if (!folders || folders.length === 0) { %>
+
+        <!-- EMPTY STATE -->
+        <div class="empty-state">
+          <h3>No folders yet</h3>
+          <p>Create your first folder to start organizing your files.</p>
+
+          <a class="btn primary" href="/folders/new">
+            Create Folder
+          </a>
+        </div>
+
+      <% } else { %>
+
+        <!-- FOLDER GRID -->
+        <div class="grid">
+
+          <% folders.forEach(folder => { %>
+            <div class="card folder-card">
+
+              <!-- Folder Link -->
+              <a href="/folders/<%= folder.id %>" class="folder-link">
+                <div class="folder-icon">📁</div>
+                <div class="folder-name"><%= folder.name %></div>
+              </a>
+
+              <!-- Actions -->
+              <form 
+                action="/folders/<%= folder.id %>" 
+                method="POST"
+              >
+                <button class="btn small danger" type="submit">
+                  Delete
+                </button>
+              </form>
+
+            </div>
+          <% }) %>
+
+        </div>
+
+      <% } %>
+
+    </main>
+  </div>
+</body>
+</html>

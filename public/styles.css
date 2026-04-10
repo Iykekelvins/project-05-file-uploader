@@ -138,3 +138,121 @@ button:hover {
 	font-size: 13px;
 	margin-bottom: 16px;
 }
+
+/* Layout */
+.app-wrapper {
+	padding: 24px;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.topbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 28px;
+}
+
+.welcome h2 {
+	font-size: 22px;
+}
+
+.welcome p {
+	font-size: 13px;
+	color: var(--muted);
+	margin-top: 4px;
+}
+
+/* Buttons */
+.btn {
+	padding: 10px 14px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.btn.primary {
+	background: linear-gradient(135deg, var(--primary), var(--primary-2));
+	color: white;
+}
+
+.btn.secondary {
+	background: rgba(255, 255, 255, 0.08);
+	color: var(--text);
+	border: 1px solid var(--border);
+}
+
+.btn.danger {
+	background: rgba(248, 113, 113, 0.15);
+	color: #fecaca;
+	border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.btn.small {
+	padding: 6px 10px;
+	font-size: 12px;
+}
+
+/* Grid */
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+	gap: 16px;
+}
+
+/* Folder card */
+.folder-card {
+	padding: 16px;
+	border-radius: 14px;
+	background: var(--panel);
+	border: 1px solid var(--border);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 140px;
+	transition: 0.2s;
+}
+
+.folder-card:hover {
+	transform: translateY(-2px);
+}
+
+.folder-link {
+	text-decoration: none;
+	color: var(--text);
+}
+
+.folder-icon {
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+
+.folder-name {
+	font-weight: 600;
+}
+
+/* Empty state */
+.empty-state {
+	text-align: center;
+	padding: 60px 20px;
+	background: var(--panel);
+	border: 1px solid var(--border);
+	border-radius: 16px;
+}
+
+.empty-state h3 {
+	margin-bottom: 8px;
+}
+
+.empty-state p {
+	color: var(--muted);
+	margin-bottom: 16px;
+}
+
+/* helpers */
+.inline {
+	display: inline;
+}
