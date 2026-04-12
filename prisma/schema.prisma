@@ -36,6 +36,7 @@ model File {
   id        Int      @id @default(autoincrement())
   name      String
   path      String
+  size      Int
   folderId  Int
   folder    Folder   @relation(fields: [folderId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())

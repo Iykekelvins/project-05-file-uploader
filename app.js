@@ -31,15 +31,26 @@ app.set('views', 'views');
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 // routes
 import authRouter from './routes/auth.route.js';
 import indexRouter from './routes/index.route.js';
 import foldersRouter from './routes/folders.route.js';
+import filesRouter from './routes/files.route.js';
 
 app.use('/', authRouter);
 app.use('/', indexRouter);
 app.use('/folders', foldersRouter);
+app.use('/files', filesRouter);
+
+app.use((err, req, res, next) => {
+	console.error('ERROR:', err.message);
+
+	res.status(500).render('error', {
+		error: err.message || 'Something went wrong',
+	});
+});
 
 const PORT = process.env.PORT || 8001;
 app.listen(PORT, (err) => {

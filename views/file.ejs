@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= file.name %> - File Uploader</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="app-wrapper">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="welcome">
+        <h2><%= file.name %></h2>
+        <p>File preview</p>
+      </div>
+
+      <div class="actions">
+        <a class="btn secondary" href="/folders/<%= file.folderId %>">
+          ← Back to Folder
+        </a>
+
+        <a class="btn primary" href="<%= file.path %>" download>
+          Download
+        </a>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      <% 
+        const ext = file.name.split('.').pop().toLowerCase();
+      %>
+
+      <% if (['png','jpg','jpeg','gif','webp'].includes(ext)) { %>
+
+        <!-- IMAGE PREVIEW -->
+        <div class="preview-container">
+          <img src="<%= file.path %>" alt="<%= file.name %>" />
+        </div>
+
+      <% } else if (['mp4','webm','ogg'].includes(ext)) { %>
+
+        <!-- VIDEO PREVIEW -->
+        <div class="preview-container">
+          <video controls>
+            <source src="<%= file.path %>" />
+            Your browser does not support video.
+          </video>
+        </div>
+
+      <% } else if (['mp3','wav'].includes(ext)) { %>
+
+        <!-- AUDIO PREVIEW -->
+        <div class="preview-container">
+          <audio controls>
+            <source src="<%= file.path %>" />
+            Your browser does not support audio.
+          </audio>
+        </div>
+
+      <% } else if (ext === 'pdf') { %>
+
+        <!-- PDF PREVIEW -->
+        <div class="preview-container">
+          <iframe src="<%= file.path %>" width="100%" height="600px"></iframe>
+        </div>
+
+      <% } else if (['txt','json','md'].includes(ext)) { %>
+
+        <!-- TEXT PREVIEW -->
+        <div class="preview-container">
+          <iframe src="<%= file.path %>" class="text-preview"></iframe>
+        </div>
+
+      <% } else { %>
+
+        <!-- FALLBACK -->
+        <div class="empty-state">
+          <h3>No preview available</h3>
+          <p>This file type cannot be previewed.</p>
+
+          <a class="btn primary" href="<%= file.path %>" download>
+            Download File
+          </a>
+        </div>
+
+      <% } %>
+
+    </main>
+  </div>
+</body>
+</html>
